@@ -24,8 +24,6 @@ Wiki, forums, and everything else: https://redmine.metaverse.org/projects/metave
 
 Facebook page: https://www.facebook.com/metaverse.org
 
-Youtube channel: https://www.youtube.com/channel/UCLdSg22i9MZ3u7ityj_PBxw
-
 # Server binary
 
 Instead of building the server, you can simply download built executable jar file.
