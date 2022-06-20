@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+      <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+      <meta content="utf-8" http-equiv="encoding">
+      <title>Metaverse Object Creation test</title>
+      ﻿<style type="text/css">
+      html, body {
+        width: 100%;
+        height:100%;
+        margin: 0px;
+        padding: 0px;
+      }
+      canvas {
+        width: 98%;
+        height:96%;
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
+      </style>﻿
+      <script src="https://cdn.babylonjs.com/babylon.js"></script>
+      <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+      <script src="/babylon/js/metaverse-min.js" type="module"></script>
+    </head>
+  <body>
+
+  <canvas id="renderCanvas" touch-action="none"></canvas>
+
+<script>
+var canvas = document.getElementById("renderCanvas"); // Get the canvas element
+var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+var debugLayer;
+
+var obj1 = null;
+var obj2 = null;
+
+import('./js/metaverse-min.js').then( (ui) => {
+  class Connect extends ui.World {
+    async createScene() {
+      this.engine = engine;
+      this.scene = new BABYLON.Scene(engine)
+      this.camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, 2, -10), this.scene);
+      this.camera.maxZ = 100000;
+      this.camera.setTarget(BABYLON.Vector3.Zero());
+      this.camera.attachControl( canvas );
+      this.camera.checkCollisions = true;
+      var light1 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), this.scene);
+      var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(1, 3, -3), this.scene);
+      var skybox = BABYLON.Mesh.CreateBox("skyBox", 100.0, this.scene);
+      var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", this.scene);
+      skyboxMaterial.backFaceCulling = false;
+      skyboxMaterial.disableLighting = true;
+      skybox.material = skyboxMaterial;
+      skybox.infiniteDistance = true;
+      skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("//www.metaverse.org/content/skybox/eso_milkyway/milkyway", this.scene);
+      skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+      
+      debugLayer = this.scene.debugLayer;
+      ui.METAVERSEUI.init(this.scene); // make sure to initialize the singleton
+    }
+  }
+
+  var world = new Connect();
+  world.createScene();
+  world.registerRenderLoop();
+
+  var touch1 = BABYLON.MeshBuilder.CreateSphere("touch1", {diameter:0.5}, world.scene);
+  touch1.position = new BABYLON.Vector3(-0.3,0,-0.4);
+  var touch2 = BABYLON.MeshBuilder.CreateSphere("touch2", {diameter:0.5}, world.scene);
+  touch2.position = new BABYLON.Vector3(0.3,0,-0.4);
+
+  var net = new ui.WorldManager(world);
+  net.debug = true; // multi-user debug info
+  net.METAVERSE.debug = true; // network debug info
+  
+  // all users in the same world share same events
+  // by default, everybody enters world named 'default'
+  world.name = 'my very own unique world name';
+  
+  // connect, set own avatar and start the session
+  net.enter({mesh:'//www.metaverse.org/babylon/dolphin.glb'});
+
+  // TODO: method to retrieve nodes as appropriate 
+  var getAnimationGroup = (vrObject) => {
+    var container = vrObject.container;
+    if ( ! container ) {
+      container = vrObject.instantiatedEntries;
+    }
+    return container.animationGroups[0];
+  }
+  
+  var receiveEvent = (o) => {
+    var animationGroup = getAnimationGroup(o);
+    if ( o.myEvent ) {
+      animationGroup.play(true);
+    } else {
+      animationGroup.stop();
+    }
+  }
+  
+  world.scene.onPointerPick = (e,p) => {
+	  console.log("Picked ", p.pickedMesh);
+    
+    if ( p.pickedMesh === touch1 ) {
+      // create a VRObject with custom properties
+      if ( ! obj1 ) {
+        net.METAVERSE.createSharedObject({
+          mesh:'//www.metaverse.org/babylon/dolphin.glb',
+          position:{x:touch1.position.x, y:touch1.position.y, z:touch1.position.z},
+          properties:{ stringProperty:'whatever', numberProperty:123.45},
+          active:true
+        }, (obj)=>{
+          console.log("Created new VRObject", obj);
+          // obj1 = obj; // see addSceneListener below
+        });
+      } else {
+        net.METAVERSE.deleteSharedObject(obj1);
+        obj1 = null;
+      }
+      return;
+    }
+    
+    if ( p.pickedMesh === touch2 ) {
+      if ( !obj2 ) {
+        // use a known class to create an object
+        var o = new net.METAVERSE.Client();
+        o.mesh = '//www.metaverse.org/babylon/dolphin.glb';
+        o.active = true;
+        o.name = 'My test client '+Date.now(); // must be unique
+        o.position = {x:touch2.position.x, y:touch2.position.y, z:touch2.position.z};
+        net.METAVERSE.createSharedObject(o, (obj)=>{
+          console.log("Shared object", obj);
+          // no custom event handling, no shared touching
+          obj2 = obj;
+        });
+      } else {
+        net.METAVERSE.deleteSharedObject(obj2);
+        obj2 = null;
+      }
+      return;
+    }
+
+    var pickedRoot = ui.METAVERSEUI.findRootNode( p.pickedMesh );
+    // root contains VRObject - a shared object
+    if ( pickedRoot.VRObject ) {
+      console.log('picked shared object ', pickedRoot.VRObject);
+      var animationGroup = getAnimationGroup(pickedRoot.VRObject);
+      if ( obj1 && pickedRoot.VRObject == obj1 ) {
+        // send a custom event - desired animation state
+        net.METAVERSE.sendEvent(obj1, {myEvent:!animationGroup.isPlaying});
+      }
+      if ( obj2 && pickedRoot.VRObject == obj2 ) {
+        // send a standard event - object position
+        net.METAVERSE.sendEvent(obj2, {position: {x:obj2.position.x, y:obj2.position.y+.1, z:obj2.position.z}});
+      }
+    }
+
+  }
+
+  // this gets triggers whenever any client receives any new VRobject
+  net.METAVERSE.addSceneListener( (sceneEvent) => {
+    // identify the object
+    if ( sceneEvent.added && sceneEvent.added.properties && sceneEvent.added.properties.stringProperty == 'whatever') {
+      // and NOW install event handler
+      // (obviously, installing/overriding the handler at class level makes it easier)
+      sceneEvent.added.myEventChanged = (o) => {
+        console.log("Performing remote change: "+o.myEvent);
+        receiveEvent(o);
+      };
+      // keep the reference, share the event when touched on
+      obj1 = sceneEvent.added;
+    }
+  });
+  
+})
+  
+// Watch for browser/canvas resize events
+window.addEventListener("resize", function () {
+    engine.resize();
+});
+
+function debugOnOff() {
+  console.log("Debug: "+debugLayer.isVisible());
+  if ( debugLayer.isVisible() ) {
+    debugLayer.hide();
+  } else {
+    debugLayer.show();
+  }
+}
+
+</script>
+<div style="position:absolute;bottom:10px;right:50%;">
+<button onClick="debugOnOff()">Debug</button>
+</div>
+</body>
+</html>

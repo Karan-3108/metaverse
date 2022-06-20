@@ -1,0 +1,386 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- 
+based on https://templatemo.com/tm-543-breezed
+thanks folks!
+ -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="Content-Language" content="en-US" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+  <title>Metaverse.org:Home</title>
+  
+  <link rel="icon" href="favicon-32.png" sizes="32x32">
+  <link rel="icon" href="favicon-128.png" sizes="128x128">
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  
+  <!--
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+  <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+  <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+  -->
+  <script src="/babylon/js/lib/babylon.js"></script>
+  <script src="/babylon/js/lib/babylonjs.loaders.min.js"></script>
+  <script src="/babylon/js/lib/babylon.gui.min.js"></script>
+  <script src="/babylon/js/lib/babylonjs.materials.min.js"></script>
+  <script src="/babylon/js/lib/babylonjs.proceduralTextures.min.js"></script>
+
+  <script src="/babylon/js/metaverse-min.js" type="module"></script>
+    
+</head>
+<body>
+
+  <!-- canvas is not focusable by default, tabIndex does that -->
+  <div>
+    <canvas id="renderCanvas" touch-action="none" tabIndex=0></canvas>
+  </div>
+
+  <header>
+      <div>
+          <a href="index.html" class="logo">
+              Metaverse.org
+          </a>
+          <nav>
+              <ul>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="https://redmine.metaverse.org/projects/metaverse-org/wiki" target="_blank">Wiki</a></li>
+                  <li><a href="https://redmine.metaverse.org/projects/metaverse-org/boards" target="_blank">Forums</a></li>
+                  <li><a href="docs/jsdoc/index.html" target="_blank">jsdoc</a></li>
+                  <li><a href="docs/javadoc/index.html?overview-summary.html" target="_blank">javadoc</a></li>
+                  <li><a href="/swagger-ui.html" target="_blank">API doc</a></li>
+              </ul>
+          </nav>
+      </div>
+  </header>
+
+  <div class="version" id="version">version</div>
+  <div class="scroll-down"><a href="#about">&nbsp;<i class="fa fa-arrow-down"></i>&nbsp;</a></div>
+  <!-- ***** Main Banner Area End ***** -->
+
+  <!-- ***** About Area Starts ***** -->
+  <section class="section" id="about">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-xs-12">
+                  <div class="left-text-content">
+                      <div class="section-heading">
+                          <h6>About Metaverse.org</h6>
+                          <h2>Free and open VR for the web.</h2>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-6 col-sm-6">
+                              <div class="feature">
+                                  <h4>Free, Open Source</h4>
+                              </div>
+                          </div>
+                          <div class="col-md-6 col-sm-6">
+                              <div class="feature">
+                                  <h4>Cross-platform</h4>
+                              </div>
+                          </div>
+                          <div class="col-md-6 col-sm-6">
+                              <div class="feature">
+                                  <h4>Community-driven</h4>
+                              </div>
+                          </div>
+                          <div class="col-md-6 col-sm-6">
+                              <div class="feature">
+                                  <h4>Multiuser-ready</h4>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-xs-12">
+                  <div class="right-text-content">
+                      <p><strong>Metaverse.org</strong> is Web Virtual/Augmented Reality (WebXR) platform.</p>
+                      <p>On the web, ready to use with any WebXR enabled browser, on any device.</p>
+                      <p><strong>Free and open</strong>, ready to help you make your own virtual worlds!</p>
+                      <p>Oh, and it's <strong>multi-user</strong> enabled, so invite your friends over.</p>
+                      <p>And, and it's <strong>voice</strong> enabled, so you can chat with your friends. (the browser will ask for your permission to use microphone)</p>
+                      <p><br></p>
+                      <p>To <strong>navigate</strong> in 3D space, drag mouse/finger, use arrow keys or WASD. </p>
+                      <p>To <strong>enter VR</strong>, click/tap goggles icon on the right side of 3D view.</p>
+                      <p><br></p>
+                      <p>First step is to <strong>choose your avatar</strong> from the list of available avatars. Just select the button by avatar's name.</p>
+                      <p>Once selected, the avatar will load, and list of available animations will appear on the left side. In VR, the avatar immediately mimics your movements - that's how other users will see you.</p>
+                      <p><strong>Or,</strong> choose a video avatar, and join as yourself! (the browser will ask for your permission to use camera)</p>
+                      <p><strong>Or,</strong> create your custom avatar. (provided by Ready Player Me, and set <strong>cookies</strong>)</p>
+                      <p><br></p>
+                      <p>Once you've choosen your avatar, you can <strong>enter a virtual world</strong>.</p>
+                      <p><br></p>
+                      <p><strong>Have fun!</strong></p>
+                      <p><br></p>
+                      <p>We do not collect any kind of personal data and do not track you in any way. We also do not provide any kind of user protection or waranty.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- ***** Footer Start ***** -->
+  <footer>
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6 col-xs-12">
+              </div>
+              <div class="col-lg-6 col-xs-12">
+                  <div class="right-text-content">
+                      <ul>
+                          <li><p>Contact</p></li>
+                          <li><a rel="nofollow" href="https://ie.linkedin.com/in/josip-almasi-8309286" target="_new"><i class="fa fa-linkedin fa-lg"></i></a></li>
+                          <li><p></p></li>
+                          <li><p>Follow Us</p></li>
+                          <li><a rel="nofollow" href="https://fb.com/metaverse.org" target="_new"><i class="fa fa-facebook fa-lg"></i></a></li>
+                          <li><a rel="nofollow" href="https://github.com/Karan-3108/metaverse" target="_new"><i class="fa fa-github fa-lg"></i></a></li>
+                          <!--
+                          TODO: <div class="fb-like" data-href="https://www.facebook.com/metaverse.org" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                           -->
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+
+  <div id="videos" hidden>
+  </div>
+
+  <script>
+  var canvas = document.getElementById("renderCanvas"); // Get the canvas element
+  //focus canvas so we get keyboard events, otherwise need to click on it first
+  canvas.focus();
+  var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+  var scene;
+  var anonymousAllowed = true;
+
+  import("../babylon/avatar-selection.js").then( (module) =>{
+  
+    var world = module.WORLD;
+    //world.METAVERSEUI.contentBase='https://www.metaverse.org/';
+
+    var nameInput = document.getElementById('nickname');
+    nameInput.addEventListener('input', (e)=>{
+      world.setMyName(e.target.value);
+    });
+    
+    var checkValidName = (name) => {
+      if ( name ) {
+        world.setLoginName(name).then((valid) => {
+          var nameLabel = document.getElementById('namelabel');
+          console.log("Valid name: "+valid);
+          if ( valid ) {
+            nameLabel.innerHTML="Name:"
+            canvas.focus();
+          } else {
+            nameLabel.innerHTML="INVALID NAME, try another:"
+          }
+          world.portalsEnabled(valid);
+        });
+      } else {
+        world.portalsEnabled(anonymousAllowed);
+      }
+    }
+  
+    nameInput.addEventListener('change', (e)=>{
+      checkValidName(e.target.value);
+    });
+
+    var say = (text) => {
+      world.write(text);
+      chatLog("ME", text);
+    } 
+       
+    document.getElementById('chatBox').style.display = 'none';
+    document.getElementById('chatInput').addEventListener('change', (e)=>{
+      say(e.target.value);
+      e.target.value = '';
+      //canvas.focus();
+    });
+
+    document.getElementById('chatInput').addEventListener('focus', (e)=>{
+      document.getElementById('chatLog').style.display = 'block';
+      var div = document.getElementById('chatLog');
+      clearChatLog(div.children[div.children.length-1]);
+    });
+    
+    document.getElementById('chatInput').addEventListener('blur', (e)=>{
+      setTimeout(() => document.getElementById('chatLog').style.display = 'none', 200);
+    });
+
+    // drag and drop support:    
+    document.getElementById('renderCanvas').ondragover = (e) => {
+      return false;
+    }
+    document.getElementById('renderCanvas').ondrop = (e) => {
+      e.preventDefault();
+      for ( var i = 0; i < e.dataTransfer.items.length; i++ ) {
+        var item = e.dataTransfer.items[i];
+        if ( item.kind == 'string' && 'text/plain' == item.type) {
+          // say that
+          item.getAsString(s=>{
+            say(s);
+          });
+        }
+      };
+    }
+
+    world.init(engine, 'avatar').then((s) => {
+      scene = s;
+      world.createSelection((avatar)=>{
+        console.log("Selected avatar: "+avatar.getUrl());
+        checkValidName(world.getMyName());
+      });
+      world.showPortals();
+      engine.resize();
+      canvas.focus();
+      world.beforeEnter = () => {
+        document.getElementById('loginForm').style.display = 'none';
+      }
+      world.afterEnter = () => {
+        document.getElementById('chatBox').style.display = 'block';
+        world.worldManager.changeListeners.push((obj, field, node) => remoteEvent(obj,field,node));
+      }
+      world.afterExit = () => {
+        console.log('Exit:'+world.worldManager.error);
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('chatBox').style.display = 'none';
+        document.getElementById('chatLog').style.display = 'block';
+        chatLog('ERROR', world.worldManager.error);
+      }
+    });
+    
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.responseType = "text";
+    xmlHttp.onreadystatechange = function() {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        var info = JSON.parse(xmlHttp.responseText);
+        // some useful stats
+        // info.git.build.version
+        // info.git.build.time
+        // info.git.commit.id.abbrev
+        // info.git.commit.message.short
+        // info.git.total.commit.count
+        var text = info.git.build.version+' '+info.git.build.time+' '+info.git.commit.id.abbrev+' '+info.git.commit.message.short;
+        document.getElementById("version").innerHTML = 'v'+text;
+      }
+    }
+    xmlHttp.open("GET", "/actuator/info", true); // true for asynchronous
+    xmlHttp.send(null);
+  
+  })
+  
+  //Watch for browser/canvas resize events
+  var resizing = false;
+  var tmp = window.devicePixelRatio;
+  window.addEventListener("resize", () => {
+    if ( ! resizing ) {
+      // resize engine after browser has resized
+      setTimeout( () => {
+        resizing = true;
+        engine.resize();
+        // fire the event again to move Enter VR button to proper place
+        // (seems it calculates position immediately)
+        window.dispatchEvent(new Event('resize'));
+        resizing = false;
+      }, 200); // CHECKME 100ms enough?
+    }
+  });
+  
+  
+  function remoteEvent(obj, field, node) {
+    if ( 'wrote' === field ) {
+      console.log(obj.id+' wrote '+obj.wrote);
+      var name = obj.name;
+      if ( ! name ) {
+        name = 'u'+obj.id;
+      }
+      chatLog(name, obj.wrote);
+    }
+  }
+  
+  function chatLog( who, what ) {
+    var div = document.createElement("div");
+    if ( hasLink(what) ) {
+      // process hyperlinks
+      let string = '';
+      what.split(' ').forEach((word)=>{
+        if ( hasLink(word) ) {
+          word = makeLink(word);
+        }
+        string += word + ' ';
+      });
+      what = string;
+    }
+    var text = "["+who+"] "+what;
+    div.innerHTML = text;
+    div.style="color: white;";
+    document.getElementById('chatLog').appendChild(div);
+    clearChatLog(div);
+  }
+  
+  function hasLink(what) {
+    return what.indexOf("://") > -1 || what.indexOf('www.') > -1 ;
+  }
+  function makeLink(word) {
+    var link = word;
+    if ( link.indexOf("://") == -1) {
+      link = "https://"+link;
+    }
+    return '<a target="_blank" href="'+link+'">'+word+'</a> ';
+  }
+  
+  function clearChatLog( div ) {
+    var log = document.getElementById('chatLog');
+    while ( div.getBoundingClientRect().bottom > log.getBoundingClientRect().bottom) {
+      log.removeChild(log.children[1]);
+    }    
+  }
+  
+  //prevent arrow keys and space from scroling the page
+  //only if webgl canvas is focused
+  window.addEventListener("keydown", function(e) {
+     if( document.activeElement === canvas && [32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+         e.preventDefault();
+     }
+  }, false);
+  
+  function debugOnOff() {
+    console.log("Debug: "+scene.debugLayer.isVisible());
+    if ( scene.debugLayer.isVisible() ) {
+      scene.debugLayer.hide();
+    } else {
+      scene.debugLayer.show();
+    }
+  }
+  
+  </script>
+
+  <div id="loginForm" style="position:absolute;bottom:50px;width:100%;text-align:center;">
+    <div>
+      <label id="namelabel" for="nickname">Name:</label>
+      <input id="nickname" type="text" placeholder="Your nick name">
+    </div>
+  </div>
+  
+  <div id="chatBox" style="position:absolute;bottom:50px;left:15%;">
+    <input id="chatInput" type="text" size=256 style="width:80%;" placeholder="text chat">
+  </div>
+
+  <div id="chatLog" style="position: absolute; margin-left: 10%; top: 80px; width:80%; height:70%; display: none; background-color: rgba(63, 63, 63, 0.5);" >
+     <div style="color: white;">Chat Log</div>
+  </div>
+
+  <div id="iframe" style="position:absolute;bottom:50px;width:100%;">
+    <iframe id="customAvatarFrame" allow="camera *; microphone *" width="100%" height="800" hidden="true"></iframe>
+  </div>
+
+</body>
+</html>
