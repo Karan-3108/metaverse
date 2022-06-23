@@ -21,8 +21,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.handler.ConcurrentWebSocketSessionDecorator;
+import org.metaverse.server.config.JacksonConfig;
 import org.metaverse.server.config.ServerConfig;
 import org.metaverse.server.dto.SceneProperties;
 import org.metaverse.server.dto.Welcome;
@@ -30,8 +33,14 @@ import org.metaverse.server.obj.Client;
 import org.metaverse.server.obj.VRObject;
 import org.metaverse.server.obj.World;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@SpringBootTest(classes = JacksonConfig.class)
 @ExtendWith(MockitoExtension.class)
 public class WorldManagerTest {
+
+  @Autowired
+  ObjectMapper objectMapper;
 
   @Mock
   private ConcurrentWebSocketSessionDecorator session;
@@ -53,6 +62,7 @@ public class WorldManagerTest {
   @BeforeEach
   public void setUp() {
     worldManager.config = config;
+    worldManager.jackson = objectMapper;
     worldManager.clientFactory = new DefaultClientFactory();
     worldManager.init();
     lenient().when(repo.getPermanents(any(Long.class))).thenReturn(new HashSet<VRObject>());

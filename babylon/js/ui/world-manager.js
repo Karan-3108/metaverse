@@ -97,7 +97,7 @@ export class WorldManager {
         this.mediaStreams.startVideo = true;
         this.mediaStreams.videoSource = undefined;
       }
-      this.mediaStreams.connect(client.token).then(() => this.mediaStreams.publish());
+      this.mediaStreams.connect(client.tokens.OpenVidu).then(() => this.mediaStreams.publish());
     }
   }
 
