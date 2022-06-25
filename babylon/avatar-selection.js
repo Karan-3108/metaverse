@@ -669,14 +669,15 @@ export class AvatarSelection extends World {
     this.removePortals();
     this.room.dispose(); // AKA ground
     // CHECKME properly dispose of avatar
-    /*
+    
     // disposing of own character effectively disables 3rd person view etc
     if ( this.character ) {
-      this.character.dispose();
+      //this.character.dispose();
       //METAVERSEUI.assetLoader.unloadAsset(this.character.getUrl());
-      this.character = null;
+      //this.character = null;
+      this.character.hide();
     }
-    */
+    
     
     if ( this.mainButtons ) {
       this.mainButtons.dispose();
