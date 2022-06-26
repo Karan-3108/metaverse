@@ -339,7 +339,7 @@ export class WorldManager {
         }
         METAVERSEUI.updateQuaternionAnimation(obj.rotate, node.rotationQuaternion, obj.rotation);
       } else if ( 'animation' === field ) {
-        avatar.startAnimation(obj.animation);
+        avatar.startAnimation(obj.animation.name, obj.animation.loop);
       } else if ( 'leftArmPos' === field ) {
         var pos = new BABYLON.Vector3(obj.leftArmPos.x, obj.leftArmPos.y, obj.leftArmPos.z);
         avatar.reachFor(avatar.body.rightArm, pos);
