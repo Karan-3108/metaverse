@@ -566,9 +566,9 @@ export class WorldManager {
 
   /** Local user wrote something - send it over and notify local listener(s) */
   write( text ) {
-    var change = {wrote:text};
-    this.sendMy(change);
-    this.myChangeListeners.forEach( (listener) => listener([change]));
+    var changes = [{field:'wrote',value:text}];
+    METAVERSE.sendMyChanges(changes);
+    this.myChangeListeners.forEach( (listener) => listener(changes));
   }
   
   /**
