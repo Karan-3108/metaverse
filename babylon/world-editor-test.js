@@ -55,7 +55,7 @@ export class WorldEditorExample extends World {
     new WorldManager(this);
     //this.worldManager.debug = true; // multi-user debug info
     //this.worldManager.METAVERSE.debug = true; // network debug info
-    this.worldManager.enter({mesh:'//www.metaverse.org/babylon/dolphin.glb'}).then(() => this.worldEditor = new WorldEditor(this, this.fileInputElement));
+    this.worldManager.enter({mesh:'//demo1.torqueverse.io/babylon/dolphin.glb'}).then(() => this.worldEditor = new WorldEditor(this, this.fileInputElement));
   }
   
   search( what, flags ) {

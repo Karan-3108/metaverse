@@ -82,7 +82,7 @@ import('./js/metaverse-min.js').then( (ui) => {
   world.name = 'my very own unique world name';
   
   // connect, set own avatar and start the session
-  net.enter({mesh:'//www.metaverse.org/babylon/dolphin.glb'});
+  net.enter({mesh:'//demo1.torqueverse.io/babylon/dolphin.glb'});
 
   // TODO: method to retrieve nodes as appropriate 
   var getAnimationGroup = (vrObject) => {
@@ -109,7 +109,7 @@ import('./js/metaverse-min.js').then( (ui) => {
       // create a VRObject with custom properties
       if ( ! obj1 ) {
         net.METAVERSE.createSharedObject({
-          mesh:'//www.metaverse.org/babylon/dolphin.glb',
+          mesh:'//localhost:8443/babylon/dolphin.glb',
           position:{x:touch1.position.x, y:touch1.position.y, z:touch1.position.z},
           properties:{ stringProperty:'whatever', numberProperty:123.45},
           active:true
@@ -128,7 +128,7 @@ import('./js/metaverse-min.js').then( (ui) => {
       if ( !obj2 ) {
         // use a known class to create an object
         var o = new net.METAVERSE.Client();
-        o.mesh = '//www.metaverse.org/babylon/dolphin.glb';
+        o.mesh = '//localhost:8443/babylon/dolphin.glb';
         o.active = true;
         o.name = 'My test client '+Date.now(); // must be unique
         o.position = {x:touch2.position.x, y:touch2.position.y, z:touch2.position.z};

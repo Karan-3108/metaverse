@@ -8,7 +8,7 @@ export class WorldTemplate extends World {
     // your world file name, defaults to scene.gltf
     this.file='dolphin.glb';
     // your world directory, defaults to location of world script
-    this.baseUrl='//www.metaverse.org/babylon/';
+    this.baseUrl='//demo1.torqueverse.io/babylon/';
   }
   // OPTIONAL: override this method to customize loading of world mesh(es)
   // leave it empty if you don't want to load anything
