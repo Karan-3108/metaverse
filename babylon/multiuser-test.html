@@ -56,7 +56,7 @@ import('./js/metaverse-min.js').then( (ui) => {
       skyboxMaterial.disableLighting = true;
       skybox.material = skyboxMaterial;
       skybox.infiniteDistance = true;
-      skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("//www.metaverse.org/content/skybox/eso_milkyway/milkyway", this.scene);
+      skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("//demo1.torqueverse.io/content/skybox/eso_milkyway/milkyway", this.scene);
       skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
       
       debugLayer = this.scene.debugLayer;

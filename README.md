@@ -16,7 +16,7 @@ Use content/worlds/template as a template for your own multiuser worlds, it's al
 
 # Live Demo
 
-Fully featured live demo/test instance of current development version is available at http://www.metaverse.org/
+Fully featured live demo/test instance of current development version is available at http://demo1.torqueverse.io/
 
 # Community
 
