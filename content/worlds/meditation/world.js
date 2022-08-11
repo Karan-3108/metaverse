@@ -6,9 +6,9 @@ export class WorldTemplate extends World {
   constructor() {
     super();
     // your world file name, defaults to scene.gltf
-    this.file='dolphin.glb';
+    this.file='lovers cavee.gltf';
     // your world directory, defaults to location of world script
-    this.baseUrl='//demo1.torqueverse.io/babylon/';
+    //this.baseUrl='//demo1.torqueverse.io/babylon/';
   }
   // OPTIONAL: override this method to customize loading of world mesh(es)
   // leave it empty if you don't want to load anything
@@ -30,7 +30,7 @@ export class WorldTemplate extends World {
     this.ground.rotation = new BABYLON.Vector3( Math.PI/2, 0, 0 );
     this.ground.position = new BABYLON.Vector3( 0, -0.05, 0 );
     this.ground.parent = this.floorGroup;
-    //this.ground.isVisible = false;
+    this.ground.isVisible = false;
     this.ground.checkCollisions = true;
     
     // handy material
